@@ -1,0 +1,57 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.2.3'
+    id 'io.spring.dependency-management' version '1.1.4'
+    id 'org.flywaydb.flyway' version '9.22.3'
+}
+
+bootJar {
+    enabled = false
+}
+
+group = 'com.b2'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    sourceCompatibility = '17'
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+    flywayMigration
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        url "https://download.red-gate.com/maven/release"
+    }
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.flywaydb:flyway-core:9.22.3'
+    compileOnly 'org.projectlombok:lombok'
+    runtimeOnly 'org.postgresql:postgresql'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+flyway {
+    url = 'jdbc:postgresql://localhost:5432/build_balance'
+    user = 'postgres'
+    password = 'admin'
+    locations = ['filesystem:src/main/resources/db/migration']
+    mixed = true
+    defaultSchema = 'build_balance'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+tasks.named('build').configure {
+    dependsOn flywayMigrate
+}
