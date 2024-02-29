@@ -1,0 +1,9 @@
+services:
+  postgres:
+    image: 'postgres:latest'
+    environment:
+      - 'POSTGRES_DB=build_balance'
+      - 'POSTGRES_PASSWORD=admin'
+      - 'POSTGRES_USER=postgres'
+    ports:
+      - '5432'

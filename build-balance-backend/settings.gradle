@@ -1,0 +1,4 @@
+rootProject.name = 'build-balance'
+include 'src:db'
+findProject(':src:db')?.name = 'db'
+
