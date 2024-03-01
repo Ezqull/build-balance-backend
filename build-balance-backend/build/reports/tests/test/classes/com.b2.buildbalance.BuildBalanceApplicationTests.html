@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+<title>Test results - BuildBalanceApplicationTests</title>
+<link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
+<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+<script src="../js/report.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="content">
+<h1>BuildBalanceApplicationTests</h1>
+<div class="breadcrumbs">
+<a href="../index.html">all</a> &gt; 
+<a href="../packages/com.b2.buildbalance.html">com.b2.buildbalance</a> &gt; BuildBalanceApplicationTests</div>
+<div id="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox" id="tests">
+<div class="counter">1</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="failures">
+<div class="counter">0</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="ignored">
+<div class="counter">0</div>
+<p>ignored</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="duration">
+<div class="counter">0.147s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox success" id="successRate">
+<div class="percent">100%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="tabs">
+<ul class="tabLinks">
+<li>
+<a href="#tab0">Tests</a>
+</li>
+<li>
+<a href="#tab1">Standard output</a>
+</li>
+</ul>
+<div id="tab0" class="tab">
+<h2>Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Duration</th>
+<th>Result</th>
+</tr>
+</thead>
+<tr>
+<td class="success">contextLoads()</td>
+<td class="success">0.147s</td>
+<td class="success">passed</td>
+</tr>
+</table>
+</div>
+<div id="tab1" class="tab">
+<h2>Standard output</h2>
+<span class="code">
+<pre>19:21:02.495 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.b2.buildbalance.BuildBalanceApplicationTests]: BuildBalanceApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+19:21:02.550 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.b2.buildbalance.BuildBalanceApplication for test class com.b2.buildbalance.BuildBalanceApplicationTests
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.2.3)
+
+2024-02-29T19:21:02.755+01:00  INFO 11004 --- [    Test worker] c.b.b.BuildBalanceApplicationTests       : Starting BuildBalanceApplicationTests using Java 17.0.10 with PID 11004 (started by mwsal in C:\Users\mwsal\Desktop\build-balance\build-balance-backend)
+2024-02-29T19:21:02.756+01:00  INFO 11004 --- [    Test worker] c.b.b.BuildBalanceApplicationTests       : No active profile set, falling back to 1 default profile: &quot;default&quot;
+2024-02-29T19:21:03.102+01:00  INFO 11004 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-02-29T19:21:03.117+01:00  INFO 11004 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 7 ms. Found 0 JPA repository interfaces.
+2024-02-29T19:21:03.359+01:00  INFO 11004 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-02-29T19:21:03.468+01:00  INFO 11004 --- [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@71a4f441
+2024-02-29T19:21:03.469+01:00  INFO 11004 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-02-29T19:21:03.529+01:00  INFO 11004 --- [    Test worker] o.f.c.internal.license.VersionPrinter    : Flyway Community Edition 9.22.3 by Redgate
+2024-02-29T19:21:03.530+01:00  INFO 11004 --- [    Test worker] o.f.c.internal.license.VersionPrinter    : See release notes here: https://rd.gt/416ObMi
+2024-02-29T19:21:03.530+01:00  INFO 11004 --- [    Test worker] o.f.c.internal.license.VersionPrinter    : 
+2024-02-29T19:21:03.539+01:00  INFO 11004 --- [    Test worker] org.flywaydb.core.FlywayExecutor         : Database: jdbc:postgresql://localhost:5432/build_balance (PostgreSQL 16.2)
+2024-02-29T19:21:03.543+01:00  WARN 11004 --- [    Test worker] o.f.c.internal.database.base.Database    : Flyway upgrade recommended: PostgreSQL 16.2 is newer than this version of Flyway and support has not been tested. The latest supported version of PostgreSQL is 15.
+2024-02-29T19:21:03.559+01:00  INFO 11004 --- [    Test worker] o.f.c.i.s.JdbcTableSchemaHistory         : Schema history table &quot;public&quot;.&quot;flyway_schema_history&quot; does not exist yet
+2024-02-29T19:21:03.561+01:00  INFO 11004 --- [    Test worker] o.f.core.internal.command.DbValidate     : Successfully validated 2 migrations (execution time 00:00.012s)
+2024-02-29T19:21:03.567+01:00  INFO 11004 --- [    Test worker] o.f.c.i.s.JdbcTableSchemaHistory         : Creating Schema History table &quot;public&quot;.&quot;flyway_schema_history&quot; ...
+2024-02-29T19:21:03.607+01:00  INFO 11004 --- [    Test worker] o.f.core.internal.command.DbMigrate      : Current version of schema &quot;public&quot;: &lt;&lt; Empty Schema &gt;&gt;
+2024-02-29T19:21:03.610+01:00  INFO 11004 --- [    Test worker] o.f.core.internal.command.DbMigrate      : Migrating schema &quot;public&quot; to version &quot;1 - Create-db-and-schema&quot;
+2024-02-29T19:21:03.612+01:00  WARN 11004 --- [    Test worker] o.f.c.i.s.DefaultSqlScriptExecutor       : DB: schema &quot;build_balance&quot; already exists, skipping (SQL State: 42P06 - Error Code: 0)
+2024-02-29T19:21:03.619+01:00  INFO 11004 --- [    Test worker] o.f.core.internal.command.DbMigrate      : Migrating schema &quot;public&quot; to version &quot;2 - User&quot;
+2024-02-29T19:21:03.636+01:00  INFO 11004 --- [    Test worker] o.f.core.internal.command.DbMigrate      : Successfully applied 2 migrations to schema &quot;public&quot;, now at version v2 (execution time 00:00.014s)
+2024-02-29T19:21:03.716+01:00  INFO 11004 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-02-29T19:21:03.758+01:00  INFO 11004 --- [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.4.Final
+2024-02-29T19:21:03.784+01:00  INFO 11004 --- [    Test worker] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-02-29T19:21:03.940+01:00  INFO 11004 --- [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-02-29T19:21:04.156+01:00  INFO 11004 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-02-29T19:21:04.159+01:00  INFO 11004 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-02-29T19:21:04.259+01:00  WARN 11004 --- [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-02-29T19:21:04.753+01:00  WARN 11004 --- [    Test worker] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 9b4242ae-d2c9-4ae6-afa0-d5a5b52bf6ab
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2024-02-29T19:21:04.834+01:00  INFO 11004 --- [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@5527dbb0, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@483fe83a, org.springframework.security.web.context.SecurityContextHolderFilter@4777f71e, org.springframework.security.web.header.HeaderWriterFilter@1cc81ea1, org.springframework.web.filter.CorsFilter@16120270, org.springframework.security.web.csrf.CsrfFilter@162e29a1, org.springframework.security.web.authentication.logout.LogoutFilter@31b67d61, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@2ecc4be7, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@25587290, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@74babce8, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@34e53c02, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4a68cbc5, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@3a47bf0e, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@1fab0394, org.springframework.security.web.access.ExceptionTranslationFilter@206b959c, org.springframework.security.web.access.intercept.AuthorizationFilter@1cb929a9]
+2024-02-29T19:21:04.891+01:00  INFO 11004 --- [    Test worker] c.b.b.BuildBalanceApplicationTests       : Started BuildBalanceApplicationTests in 2.248 seconds (process running for 2.861)
+</pre>
+</span>
+</div>
+</div>
+<div id="footer">
+<p>
+<div>
+<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+</label>
+</div>Generated by 
+<a href="http://www.gradle.org">Gradle 8.5</a> at 29 Feb 2024, 19:21:05</p>
+</div>
+</div>
+</body>
+</html>
