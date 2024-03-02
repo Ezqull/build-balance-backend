@@ -40,10 +40,13 @@ dependencies {
 }
 
 flyway {
-    url = 'jdbc:postgresql://localhost:5432/build_balance'
+    url = 'jdbc:postgresql://postgres:5432/build_balance'
     user = 'postgres'
     password = 'admin'
-    locations = ['filesystem:src/main/resources/db/migration']
+    locations = [
+            'filesystem:src/main/resources/migrations',
+            'filesystem:src/main/java/migrations'
+    ]
     mixed = true
     defaultSchema = 'build_balance'
 }
