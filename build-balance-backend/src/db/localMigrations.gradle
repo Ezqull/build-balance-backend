@@ -1,0 +1,14 @@
+apply plugin: 'org.flywaydb.flyway'
+
+flyway {
+    url = 'jdbc:postgresql://localhost:5433/build_balance'
+    user = 'postgres'
+    password = 'admin'
+    locations = [
+            'filesystem:src/main/resources/migrations',
+            'filesystem:src/main/java/migrations'
+    ]
+    mixed = true
+    defaultSchema = 'build_balance'
+}
+

@@ -47,7 +47,7 @@ dependencies {
 }
 
 flyway {
-    url = 'jdbc:postgresql://localhost:5433/build_balance'
+    url = 'jdbc:postgresql://postgres:5432/build_balance'
     user = 'postgres'
     password = 'admin'
     locations = [
@@ -64,4 +64,8 @@ tasks.named('test') {
 
 tasks.named('build').configure {
     dependsOn flywayMigrate
+}
+
+if (project.hasProperty('localMigrations')) {
+    apply from: 'localMigrations.gradle'
 }
