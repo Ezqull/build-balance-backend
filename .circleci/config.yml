@@ -5,6 +5,11 @@ jobs:
   test-java:
     docker:
       - image: cimg/openjdk:17.0
+      - image: postgres:13
+        environment:
+          POSTGRES_USER: postgres
+          POSTGRES_DB: build_balance
+          POSTGRES_PASSWORD: admin
     working_directory: ~/project/build-balance-backend
     steps:
       - checkout:
