@@ -10,7 +10,7 @@ jobs:
           POSTGRES_USER: postgres
           POSTGRES_DB: build_balance
           POSTGRES_PASSWORD: admin
-    working_directory: ~/project/build-balance-backend
+    working_directory: ~/project/build-balance
     steps:
       - checkout:
           path: ~/project
