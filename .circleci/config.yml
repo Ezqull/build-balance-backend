@@ -1,3 +1,6 @@
+# This config was automatically generated from your source code
+# Stacks detected: cicd:github-actions:.github/workflows,deps:java:build-balance-backend,tool:gradle:
+version: 2.1
 jobs:
   test-java:
     docker:
@@ -34,7 +37,6 @@ jobs:
             - ~/.gradle/caches
       - store_artifacts:
           path: build/reports
-
 
   deploy:
     # This is an example deploy job, not actually used by the workflow
