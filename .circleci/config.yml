@@ -5,10 +5,18 @@ jobs:
   test-java:
     docker:
       - image: cimg/openjdk:17.0
-    working_directory: ~/project/build-balance-backend
+      - image: postgres:13
+        environment:
+          POSTGRES_USER: postgres
+          POSTGRES_DB: build_balance
+          POSTGRES_PASSWORD: admin
+    working_directory: ~/project/build-balance
     steps:
       - checkout:
           path: ~/project
+      - run:
+          name: Set executable permissions for Gradlew
+          command: chmod +x ./gradlew
       - run:
           name: Calculate cache key
           command: |-
