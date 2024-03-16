@@ -23,7 +23,7 @@ jobs:
       - run:
           name: Wait for PostgreSQL
           command: |
-            dockerize -wait tcp://localhost:5432 -timeout 1m
+            dockerize -wait tcp://postgres:5432 -timeout 1m
       - run:
           name: Set Spring Profile
           command: echo 'export SPRING_PROFILES_ACTIVE=ci' >> $BASH_ENV
