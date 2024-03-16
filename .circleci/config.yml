@@ -1,3 +1,5 @@
+# This config was automatically generated from your source code
+# Stacks detected: cicd:github-actions:.github/workflows,deps:java:build-balance-backend,tool:gradle:
 version: 2.1
 jobs:
   test-java:
@@ -16,9 +18,6 @@ jobs:
           name: Set executable permissions for Gradlew
           command: chmod +x ./gradlew
       - run:
-          name: Set CI profile
-          command: echo 'export SPRING_PROFILES_ACTIVE=ci' >> $BASH_ENV
-      - run:
           name: Calculate cache key
           command: |-
             find . -name 'pom.xml' -o -name 'gradlew*' -o -name '*.gradle*' | \
@@ -35,8 +34,23 @@ jobs:
             - ~/.gradle/caches
       - store_artifacts:
           path: build/reports
-          
+
+  deploy:
+    # This is an example deploy job, not actually used by the workflow
+    docker:
+      - image: cimg/base:stable
+    steps:
+      # Replace this with steps to deploy to users
+      - run:
+          name: deploy
+          command: '#e.g. ./deploy.sh'
+      - run:
+          name: found github actions config
+          command: ':'
 workflows:
   build-and-test:
     jobs:
       - test-java
+    # - deploy:
+    #     requires:
+    #       - test-java
