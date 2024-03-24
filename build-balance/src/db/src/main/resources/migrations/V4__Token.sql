@@ -10,6 +10,6 @@ CREATE TABLE IF NOT EXISTS "token"
     user_id    INTEGER    NOT NULL,
     CONSTRAINT fk_user
         FOREIGN KEY (user_id)
-            REFERENCES "user" (id)
+            REFERENCES "app_user" (id)
             ON DELETE CASCADE
 );
