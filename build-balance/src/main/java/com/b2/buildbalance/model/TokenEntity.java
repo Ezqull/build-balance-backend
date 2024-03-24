@@ -1,6 +1,5 @@
 package com.b2.buildbalance.model;
 
-import com.b2.buildbalance.model.types.TokenType;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -16,18 +15,21 @@ public class TokenEntity extends BaseEntity {
             nullable = false,
             unique = true)
     private String token;
-    @Enumerated(EnumType.STRING)
-    @Column(name = "token_type",
-            nullable = false)
-    private TokenType type;
+
+    @Column(name = "token_type", nullable = false)
+    private String tokenType;
+
     @Column(name = "expired",
             nullable = false)
     private Boolean expired;
+
     @Column(name = "revoked",
             nullable = false)
     private Boolean revoked;
-    @ManyToOne(cascade = CascadeType.REMOVE)
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id",
             referencedColumnName = "id")
+    @ToString.Exclude
     private UserEntity user;
 }

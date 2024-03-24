@@ -1,6 +1,8 @@
 package com.b2.buildbalance.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
@@ -12,7 +14,9 @@ import java.util.*;
 @Getter
 @Setter
 @Entity
-@Table(name = "user")
+@Builder
+@AllArgsConstructor
+@Table(name = "app_user", schema = "build_balance")
 public class UserEntity extends BaseEntity implements UserDetails {
     @Column(name = "email",
             nullable = false,
@@ -48,7 +52,6 @@ public class UserEntity extends BaseEntity implements UserDetails {
     }
 
     public UserEntity() {
-
     }
 
     @Override
@@ -56,7 +59,22 @@ public class UserEntity extends BaseEntity implements UserDetails {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserEntity entity = (UserEntity) o;
-        return Objects.equals(getEmail(), entity.getEmail()) && Objects.equals(getFirstName(), entity.getFirstName()) && Objects.equals(getLastName(), entity.getLastName()) && Objects.equals(getPassword(), entity.getPassword());
+        return Objects.equals(
+                getEmail(),
+                entity.getEmail()
+        ) &&
+                Objects.equals(
+                        getFirstName(),
+                        entity.getFirstName()
+                ) &&
+                Objects.equals(
+                        getLastName(),
+                        entity.getLastName()
+                ) &&
+                Objects.equals(
+                        getPassword(),
+                        entity.getPassword()
+                );
     }
 
     @Override
