@@ -1,5 +1,6 @@
 package com.b2.buildbalance.service.impl;
 
+import com.b2.buildbalance.dto.request.UserRequest;
 import com.b2.buildbalance.model.RoleEntity;
 import com.b2.buildbalance.model.UserEntity;
 import com.b2.buildbalance.repository.RoleRepository;
@@ -7,6 +8,7 @@ import com.b2.buildbalance.repository.UserRepository;
 import com.b2.buildbalance.service.UserService;
 import com.b2.buildbalance.validation.UserValidator;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +20,7 @@ import static java.lang.String.format;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
+    private final ModelMapper modelMapper;
     private final UserValidator userValidator;
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
@@ -40,7 +43,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserEntity saveUser(final UserEntity userEntity) {
+    public UserEntity saveUser(final UserRequest request) {
+        final UserEntity userEntity = modelMapper.map(request, UserEntity.class);
         userValidator.validateUserRequest(userEntity);
         final RoleEntity role = roleRepository.findById(1).orElse(new RoleEntity());
         userEntity.setRole(role);

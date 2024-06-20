@@ -1,5 +1,6 @@
 package com.b2.buildbalance.security.config;
 
+import com.b2.buildbalance.exception.NotFoundException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
@@ -13,6 +14,7 @@ import javax.crypto.SecretKey;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.Function;
 
 @Service
@@ -35,15 +37,41 @@ public class JwtService {
         return claimsResolver.apply(claims);
     }
 
+
     public String generateToken(final UserDetails userDetails) {
         return generateToken(new HashMap<>(), userDetails);
     }
 
     public String generateToken(
-            final Map<String, Object> extraClaims,
-            final UserDetails userDetails
+            Map<String, Object> extraClaims,
+            UserDetails userDetails
     ) {
+        return buildToken(
+                extraClaims,
+                userDetails,
+                Long.parseLong(Optional.of(env.getProperty("JWT_EXPIRATION"))
+                        .orElseThrow(() -> new NotFoundException("Corrupted environment entry: JWT_EXPIRATION.")
+                        ))
+        );
+    }
 
+    public String generateRefreshToken(
+            UserDetails userDetails
+    ) {
+        return buildToken(
+                new HashMap<>(),
+                userDetails,
+                Long.parseLong(Optional.of(env.getProperty("JWT_REFRESH_EXPIRATION"))
+                        .orElseThrow(() -> new NotFoundException("Corrupted environment entry: JWT_REFRESH_EXPIRATION.")
+                        ))
+        );
+    }
+
+    private String buildToken(
+            Map<String, Object> extraClaims,
+            UserDetails userDetails,
+            long expiration
+    ) {
         return Jwts.builder()
                 .claims(extraClaims)
                 .subject(userDetails.getUsername())

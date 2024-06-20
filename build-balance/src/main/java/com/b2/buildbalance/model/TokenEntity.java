@@ -3,12 +3,15 @@ package com.b2.buildbalance.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Objects;
+
 @Getter
 @Setter
 @Entity
+@Builder
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 @Table(name = "token")
 public class TokenEntity extends BaseEntity {
     @Column(name = "token",
@@ -32,4 +35,17 @@ public class TokenEntity extends BaseEntity {
             referencedColumnName = "id")
     @ToString.Exclude
     private UserEntity user;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TokenEntity token1 = (TokenEntity) o;
+        return Objects.equals(token, token1.token) && Objects.equals(tokenType, token1.tokenType) && Objects.equals(expired, token1.expired) && Objects.equals(revoked, token1.revoked);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(token, tokenType, expired, revoked);
+    }
 }
