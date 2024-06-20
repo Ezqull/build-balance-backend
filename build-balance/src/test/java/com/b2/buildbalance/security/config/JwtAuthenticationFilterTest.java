@@ -1,7 +1,8 @@
 package com.b2.buildbalance.security.config;
 
-import com.b2.buildbalance.model.RoleEntity;
+import com.b2.buildbalance.model.TokenEntity;
 import com.b2.buildbalance.model.UserEntity;
+import com.b2.buildbalance.repository.TokenRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -16,27 +17,26 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.io.IOException;
+import java.util.Optional;
 
+import static com.b2.buildbalance.utils.TestUtils.createTokenEntity;
+import static com.b2.buildbalance.utils.TestUtils.createUserEntity;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class JwtAuthenticationFilterTest {
 
+    private final static String NON_AUTH_PATH = "/api/v1/token";
+
     @Mock
     private JwtService jwtService;
-
     @Mock
     private UserDetailsService userDetailsService;
-
-    @Mock
-    private HttpServletRequest request;
-
-    @Mock
-    private HttpServletResponse response;
-
     @Mock
     private FilterChain filterChain;
+    @Mock
+    private TokenRepository tokenRepository;
 
     @InjectMocks
     private JwtAuthenticationFilter jwtAuthenticationFilter;
@@ -44,6 +44,10 @@ public class JwtAuthenticationFilterTest {
     @Test
     public void shouldNotAuthenticateIfAuthHeaderIsMissing() throws ServletException, IOException {
 
+        final HttpServletRequest request = mock(HttpServletRequest.class);
+        final HttpServletResponse response = mock(HttpServletResponse.class);
+
+        when(request.getServletPath()).thenReturn(NON_AUTH_PATH);
         when(request.getHeader("Authorization")).thenReturn(null);
 
         jwtAuthenticationFilter.doFilterInternal(request, response, filterChain);
@@ -55,29 +59,24 @@ public class JwtAuthenticationFilterTest {
     @Test
     public void shouldAuthenticateWithValidToken() throws ServletException, IOException {
 
-        String email = "user@example.com";
-        String token = "Bearer valid.token.here";
-        String password = "password";
+        final HttpServletRequest request = mock(HttpServletRequest.class);
+        final HttpServletResponse response = mock(HttpServletResponse.class);
 
-        UserEntity user = UserEntity.builder()
-                .email(email)
-                .password(password)
-                .role(
-                        RoleEntity.builder()
-                                .name("USER")
-                                .build()
-                )
-                .build();
+        final UserEntity user = createUserEntity();
+        final TokenEntity token = createTokenEntity(user, false, false);
+        final String tokenBody = token.getToken().substring(7);
 
-        when(request.getHeader("Authorization")).thenReturn(token);
-        when(jwtService.extractEmail(anyString())).thenReturn(email);
-        when(jwtService.isTokenValid(anyString(), any())).thenReturn(true);
-        when(userDetailsService.loadUserByUsername(email)).thenReturn(user);
+        when(request.getHeader("Authorization")).thenReturn(token.getToken());
+        when(request.getServletPath()).thenReturn(NON_AUTH_PATH);
+        when(jwtService.extractEmail(anyString())).thenReturn(user.getEmail());
+        when(userDetailsService.loadUserByUsername(user.getEmail())).thenReturn(user);
+        when(this.tokenRepository.findByToken(tokenBody)).thenReturn(Optional.of(token));
+        when(this.jwtService.isTokenValid(tokenBody, user)).thenReturn(true);
 
-        jwtAuthenticationFilter.doFilterInternal(request, response, filterChain);
+        this.jwtAuthenticationFilter.doFilterInternal(request, response, filterChain);
 
         assertNotNull(SecurityContextHolder.getContext().getAuthentication());
-        assertEquals(email, SecurityContextHolder.getContext().getAuthentication().getName());
+        assertEquals(user.getEmail(), SecurityContextHolder.getContext().getAuthentication().getName());
     }
 
     @AfterEach

@@ -27,6 +27,7 @@ public class JwtServiceTest {
     @BeforeEach
     public void setup() {
         when(env.getProperty("JWT_SECRET_KEY")).thenReturn(SECRET_KEY);
+        when(env.getProperty("JWT_EXPIRATION")).thenReturn(String.valueOf(100));
     }
 
     @Test

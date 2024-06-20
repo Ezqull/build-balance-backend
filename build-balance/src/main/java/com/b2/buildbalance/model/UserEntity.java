@@ -2,9 +2,9 @@ package com.b2.buildbalance.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,10 +14,11 @@ import java.util.*;
 @Getter
 @Setter
 @Entity
-@Builder
+@SuperBuilder
 @AllArgsConstructor
 @Table(name = "app_user", schema = "build_balance")
 public class UserEntity extends BaseEntity implements UserDetails {
+
     @Column(name = "email",
             nullable = false,
             unique = true)
